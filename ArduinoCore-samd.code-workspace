@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "./bootloaders/zero",
+			"name": "src/bootloader"
+		},
+		{
+			"path": "./variants",
+			"name": "src/variants"
+		}
+		{
+			"path": "./",
+			"name": "root",
+		}
+	],
+	"settings": {}
+}

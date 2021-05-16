@@ -1,3 +1,7 @@
 *.bz2
 
 bootloaders/*/build/
+bootloaders/*/*.o
+bootloaders/*/*.s
+bootloaders/*/*.out
+bootloaders/*/*.res
