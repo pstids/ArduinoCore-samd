@@ -29,6 +29,13 @@
 #include "sam_ba_usb.h"
 #include "sam_ba_cdc.h"
 
+/**
+ * By default, enable double tap
+ */
+#ifndef DISABLE_DOUBLE_TAP
+  #define DISABLE_DOUBLE_TAP 0
+#endif
+
 extern uint32_t __sketch_vectors_ptr; // Exported value from linker script
 extern void board_init(void);
 
@@ -90,6 +97,7 @@ static void check_start_application(void)
     return;
   }
 
+#if DISABLE_DOUBLE_TAP == 0
 #if defined(BOOT_DOUBLE_TAP_ADDRESS)
   #define DOUBLE_TAP_MAGIC 0x07738135
   if (PM->RCAUSE.bit.POR)
@@ -114,7 +122,7 @@ static void check_start_application(void)
     for (uint32_t i=0; i<2500; i++) /* 10ms */
       /* force compiler to not optimize this... */
       __asm__ __volatile__("");
-#endif
+#endif // HAS_EZ6301QI
 
     /* First tap */
     BOOT_DOUBLE_TAP_DATA = DOUBLE_TAP_MAGIC;
@@ -129,7 +137,8 @@ static void check_start_application(void)
     /* Timeout happened, continue boot... */
     BOOT_DOUBLE_TAP_DATA = 0;
   }
-#endif
+#endif // defined(BOOT_DOUBLE_TAP_ADDRESS)
+#endif // ENABLE_DOUBLE_TAP
 
 /*
 #if defined(BOOT_LOAD_PIN)

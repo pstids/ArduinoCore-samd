@@ -48,3 +48,9 @@
 
 #define BOOT_PIN_MASK (1U << (BOOT_LOAD_PIN & 0x1f))
 
+/**
+ * DISABLE_DOUBLE_TAP
+ * Set to 1 to disable double tap bootloader mode
+ */
+#define DISABLE_DOUBLE_TAP 1
+
